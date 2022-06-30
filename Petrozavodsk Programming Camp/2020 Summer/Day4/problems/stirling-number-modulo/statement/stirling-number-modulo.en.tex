@@ -1,0 +1,32 @@
+\begin{problem}{Stirling Number}{\textsl{standard input}}{\textsl{standard output}}{3 seconds}{256 mebibytes}
+
+\newcommand{\stirling}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
+
+The Stirling number of the first kind $\stirling{n}{k}$ is the number of permutations of $n$ elements with exactly $k$ disjoint cycles. The well-known recurrence relation is defined as follows:
+$$\stirling{n + 1}{k} = n \stirling{n}{k} + \stirling{n}{k - 1}$$
+for $k>0$, with the initial conditions
+
+$$\stirling{0}{0} = 1 \quad {\mbox{and}} \quad \stirling{n}{0} = \stirling{0}{n} = 0$$
+for $n > 0$.
+
+Given four integers, $n$, $l$, $r$, and $p$, find the value of $$\left(\sum_{k=l}^{r}\stirling{n}{k} \right) \bmod p$$ where $p$ is prime.
+
+\InputFile
+The first line contains four integers, $n$, $l$, $r$, and $p$ ($1 \le n \le 10^{18}$, $0 \le l \le r \le n$, $2 \le p \le 10^6$, $p$ is prime).
+
+
+\OutputFile
+Output an integer denoting the answer.
+
+
+
+
+\Examples
+
+\begin{example}
+\exmpfile{example.01}{example.01.a}%
+\exmpfile{example.02}{example.02.a}%
+\exmpfile{example.03}{example.03.a}%
+\end{example}
+
+\end{problem}

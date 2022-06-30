@@ -1,0 +1,38 @@
+\begin{problem}{A + B Problem}{\textsl{standard input}}{\textsl{standard output}}{1 second}{256 mebibytes}
+
+A binary string is a string consisting only of digits ``$0$'' and ``$1$''. Given a binary string $s$ of length $(n + m)$, please divide it into two subsequences $A = a_1 a_2 \ldots a_n$ of length $n$ and $B = b_1 b_2 \ldots b_m$ of length $m$ such that each digit in $s$ belongs to exactly one subsequence.
+
+Let $f$ be the function that transforms a sequence of ``$0$'' and ``$1$'' into a binary integer. For example, $f(\{1, 0, 1, 0\}) = 1010_2$ and $f(\{0, 0, 1, 0\}) = 10_2$. Your task is to find such $A$ and $B$ that maximize $(f(A) + f(B))$.
+
+Recall that a subsequence of a string is a sequence that can be derived by deleting some characters (possibly none) from the string without changing the order of the remaining characters.
+
+\InputFile
+There are multiple test cases. The first line of the input contains an integer $T$ indicating the number of test cases. For each test case:
+
+The first line contains two integers $n$ and $m$ ($1 \le n, m \le 10^5$) indicating the lengths of the desired subsequences.
+
+The second line contains a binary string $s$ ($|s| = n + m$, $s_i \in \{\text{``$0$''}, \text{``$1$''}\}$).
+
+It is guaranteed that the sum of $(n + m)$ of all test cases will not exceed $2 \cdot 10^6$.
+
+
+\OutputFile
+For each test case, output one line containing a binary integer indicating the largest possible result of $(f(A) + f(B))$. Note that $(f(A) + f(B))$ should be printed as a binary integer with no leading zeroes, while $A$ and $B$ are sequences, and leading zeros are allowed in the sequences.
+
+
+
+
+\Example
+
+\begin{example}
+\exmpfile{example.01}{example.01.a}%
+\end{example}
+
+\Note
+We now use \underline{underline} to indicate subsequence $A$ in the binary string.
+
+For the first sample test case, a valid solution is to divide the binary string into \underline{1}000\underline{101} such that $f(\{1, 1, 0, 1\}) + f(\{0, 0, 0\}) = 1101_2 + 0_2 = 1101_2$.
+
+For the second sample test case, a valid solution is to divide the binary string into \underline{1}1\underline{1}1 such that $f(\{1, 1\}) + f(\{1, 1\}) = 11_2 + 11_2 = 110_2$.
+
+\end{problem}

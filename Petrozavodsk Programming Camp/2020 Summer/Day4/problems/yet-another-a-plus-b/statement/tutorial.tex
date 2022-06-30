@@ -1,0 +1,12 @@
+\begin{tutorial}{A + B Problem}
+
+The following greedy method works for this problem, the proof is omitted: we try to fill $0$ in the least significant bit. And in this way, we will maximize the benefit of each $1$.
+
+Consider assigning each bit from left to right:
+
+\begin{itemize}
+\item If it is $0$, we will try to assign this $0$ to the number which has less bits unassigned.
+\item If it is $1$, we will first assign this $1$ to the number which has less bits unassigned. Assume this $1$ is in the $x$-th position, we need to check if we can assign $1$ to another number until the $x$-th position and still have enough bits to assign the remaining unassigned bits. If this is true, we can keep this number (it makes no difference to which number we assign this $1$, and we should keep the higher bit for the incoming $1$s). Otherwise, we should assign this $1$ to another number.
+\end{itemize}
+
+\end{tutorial}

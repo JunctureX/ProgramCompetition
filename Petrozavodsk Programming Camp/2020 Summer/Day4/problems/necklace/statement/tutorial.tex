@@ -1,0 +1,13 @@
+\begin{tutorial}{Necklace}
+
+Let the number of gems of color $i$ in the the necklace be $\mathit{cnt}(i)$. A necklace of length $m$ is good iff $m \ge 2 \cdot \max_i(\mathit{cnt}(i))$.
+
+Let the maximum value of $\mathit{cnt}(i)$ be $x$. For gems with color $i$, only the largest $x$ values could be on the necklace: let it be $V_i$. 
+
+Let $V$ be $V_1 \cup V_2 \cup \ldots \cup V_n$. If we sort the values in $V$ in decreasing order, the first $2x$ (except $x=1$, we need at least $3$ values) must be taken. For the remaining values, we can take all positive values. This will definitely give us the best solution.
+
+We can use priority queue to speed up the procedure. When $x$ becomes $x+1$, only new values will be added to $V$. We can use a minimum heap $A$ to maintain the first $2x$ values, and a maximum heap $B$ to maintain the remaining values. For the newly added values, we add them to $B$ first. After that, take top values from $B$ to make the size of $A$ at least $2(x+1)$. Also, take top positive values from $B$ to $A$.
+
+As for the solution, we can find the optimal $x$ and try to simulate the above procedure using the optimal $x$ to get a valid solution.
+
+\end{tutorial}

@@ -1,0 +1,52 @@
+\begin{tutorial}{Fibonacci Partition}
+
+\providecommand{\url}[1]{\underline{\texttt{#1}}}
+
+Consider the \textit{Zenkorf representation} of $X$: $X=\sum\limits_{i=1}^{\infty} a_i \cdot F_i$, where $a_i \in \{0, 1\}$ and $a_i \cdot a_{i+1} = 0$.
+
+Let the indices of non-zero terms $a_i$ be $p_1,p_2,\ldots,p_m$. We can use the following greedy algorithm to find the answer:
+
+\begin{enumerate}
+\item Start from $\mathit{answer}=0$ and $\mathit{last}=0$.
+\item For each $i=1,2,\ldots,m$:
+\begin{itemize}
+\item if $p_i-last \ge 3$, let $\mathit{answer}$ be $\mathit{answer} + \lceil \frac{p_i - last}{2} \rceil$ and $\mathit{last}$ be $p_i-1$;
+\item otherwise, let $\mathit{answer}$ be $\mathit{answer}+1$ and $\mathit{last}$ be $p_i$.
+\end{itemize}
+\end{enumerate}
+
+If we use a binary search tree (like Treap) to maintain the sequence $\{p_i\}$, the value of $\mathit{answer}$ can be calculated easily. The problem is how to maintain the sequence when $X$ changes.
+
+Let's change the definition of $F_n$ in the problem: $F_0=0,F_1=1,F_n=F_{n-1}+F_{n-2}$, and generalize the definition to negative integers $n$. We can see that $F_{-n}=(-1)^{n+1}F_n$.
+
+Combining with Lucas numbers，$L_0=2$, $L_1=1$, $L_n=L_{n-1}+L_{n-2}$，we have:
+
+$$
+L_k \cdot F_n = F_{n+k} + (-1)^kF_{n-k}
+$$
+
+If we partition $a$ into several Lucas numbers (actually, the greedy algorithm also leads to a unique representation like Fibonacci number), with the above formula, we only need to care about add / subtract a Fibonacci number to / from $X$. This makes the problem easier.
+
+After some observations, we can find that the change only affects the maximal consecutive \textit{alternating segment} (a segment of the form \texttt{10101...10101}) in the \textit{Zenkorf representation} of $X$. So, we can use binary search tree to maintain the maximal consecutive segments.
+
+The following article helps a lot: \url{http://www.algonotes.com/en/fibonacci-arithmetic/}.
+
+Let's consider how to add $F_x$ to $X$ first:
+
+\begin{enumerate}
+\item If $a_{x-1} = a_{x} = a_{x+1} = 0$, we can simply make $a_x=1$.
+\item At least one of $a_{x-1}$, $a_{x}$ and $a_{x+1}$ is non-zero. Assume the lower and upper bounds of the maximal consecutive alternating segment containing this non-zero value are $l$ and $r$:
+\begin{itemize}
+   \item $x=r+1$, we need to make $a_r=0$ and $a_{r+2}=1$.
+   \item $l \le x \le r$ and $x \equiv l \pmod 2$, we need to make $a_l=a_{l+2}=\ldots=a_r=0$ and $a_{l+1}=a_{l+3}=\ldots=a_{x-1}=a_{r+1}=a_{l-2}=1$.
+   \item $l \le x \le r$ and $x \not \equiv l \pmod 2$, we need to make $a_{x+1}=a_{x+3}=\ldots=a_r=0$ and $a_{r+1}=1$.
+\end{itemize}
+\end{enumerate}
+
+Note that if we make $a_{r+2}$ or $a_{l-2}$ be $1$, adjacent $1$s may appear in the \textit{Zenkorf representation}. To eliminate this, we can just repeat the above procedure recursively. And only constant number of recursive calls will trigger.
+
+As for subtracting a Fibonacci number $F_x$ from $X$, we can use similar analysis.
+
+The whole time complexity will be $O(n \log^2 A)$, where $A=\max(a_i,b_i)$.
+
+\end{tutorial}

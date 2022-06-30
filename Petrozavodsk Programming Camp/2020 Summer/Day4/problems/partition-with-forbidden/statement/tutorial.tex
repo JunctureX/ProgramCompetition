@@ -1,0 +1,15 @@
+\begin{tutorial}{Partition Number}
+
+Let $p(m)$ be the number of solutions of equation $x_1+x_2+\ldots+x_k=m$ such that $x_1 \le x_2 \le \ldots \le x_k$. Actually, it is the partition number. And let $\mathit{odd}(x)$ and $\mathit{even}(x)$ be the number of ways summing up to $x$ using odd or even distinct numbers from $A$, respectively.
+
+The answer for the problem will be:
+
+$$
+\sum_{i=0}^{m} (\mathit{even}(i) - \mathit{odd}(i)) \cdot p(m-i)
+$$
+
+which can be proved using inclusion-exclusion principle.
+
+The value of $\mathit{odd}(x)$ and $\mathit{even}(x)$ can be calculated using simple dynamic programming. And the value of $p(x)$ can be calculated using the classic dynamic programming or pentagonal number theorem in $O(m \sqrt m)$. Also, polynomial inversion and fast Fourier transform work in $O(m \log m)$.
+
+\end{tutorial}
